@@ -1,0 +1,22 @@
+{
+  "dataframe_split": {
+    "columns": [
+      "age",
+      "education-num",
+      "sex",
+      "capital-gain",
+      "capital-loss",
+      "hours-per-week"
+    ],
+    "data": [
+      [
+        0.3150684931506849,
+        0.2,
+        0,
+        0.0,
+        0.4722222222222222,
+        0.39795918367346933
+      ]
+    ]
+  }
+}
