@@ -8,7 +8,7 @@ from preprocessing import load_data, preprocess
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
-experiment_name = "experiment_5"
+experiment_name = "experiment_6"
 mlflow.create_experiment(experiment_name)
 mlflow.set_experiment(experiment_name)
 
@@ -21,7 +21,7 @@ with mlflow.start_run() as run:
     y = df["target"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 
-    params = {"n_estimators": 20, "max_depth": 3, "criterion": "entropy"}
+    params = {"n_estimators": 40, "max_depth": 5, "criterion": "gini"}
     model = RandomForestClassifier(**params)
     mlflow.set_tag("model", "Random Forest")
     mlflow.log_params(params)
