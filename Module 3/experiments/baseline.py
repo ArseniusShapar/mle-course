@@ -4,26 +4,26 @@ import numpy as np
 from evaluation import build_prc, build_roc, calculate_metrics, metrics_barplot
 from mlflow.models.signature import infer_signature
 from preprocessing import load_data, preprocess
-from sklearn.linear_model import LogisticRegression
+from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 
-experiment_name = "experiment_2"
+experiment_name = "experiment_3"
 mlflow.create_experiment(experiment_name)
 mlflow.set_experiment(experiment_name)
 
 with mlflow.start_run() as run:
     df = load_data()
     df = preprocess(df)
-    df = df.drop(
+    df = df.drop(   
         ["workclass", "education", "marital-status", "occupation", "relationship", "race", "native-country"], axis=1
     )
     X = df.drop("target", axis=1)
     y = df["target"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 
-    params = {"penalty": None, "class_weight": "balanced"}
-    model = LogisticRegression(**params)
-    mlflow.set_tag("model", "Logistic Regression")
+    params = {"n_neighbors": 5, 'metric': 'manhattan'}
+    model = KNeighborsClassifier(**params)
+    mlflow.set_tag("model", "kNN")
     mlflow.log_params(params)
 
     model.fit(X_train, y_train)
@@ -42,5 +42,5 @@ with mlflow.start_run() as run:
         artifact_path="model",
         signature=signature,
         input_example=X_train.iloc[:1],
-        registered_model_name="logistic-regression",
+        registered_model_name="k-nearest-neighbors",
     )
