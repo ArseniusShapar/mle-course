@@ -1,0 +1,5 @@
+name: module-3
+
+entry_points:
+  main:
+    command: "python experiments/baseline.py"
