@@ -7,7 +7,7 @@ from preprocessing import load_data, preprocess
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 
-experiment_name = "experiment_4"
+experiment_name = "experiment_2"
 mlflow.create_experiment(experiment_name)
 mlflow.set_experiment(experiment_name)
 
@@ -21,7 +21,7 @@ with mlflow.start_run() as run:
     y = df["target"]
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 
-    params = {"penalty": "l2", "C": 1.0}
+    params = {"penalty": None, "class_weight": "balanced"}
     model = LogisticRegression(**params)
     mlflow.set_tag("model", "Logistic Regression")
     mlflow.log_params(params)
