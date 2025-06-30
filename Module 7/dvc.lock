@@ -1,0 +1,50 @@
+schema: '2.0'
+stages:
+  clean_data:
+    cmd: python scripts/clean_data.py data/raw/adult.csv 
+      data/processed/clean.csv
+    deps:
+    - path: data/raw/adult.csv
+      hash: md5
+      md5: 46a9b0988c83b02d27640bf9ced3ab95
+      size: 5326368
+    outs:
+    - path: data/processed/clean.csv
+      hash: md5
+      md5: 39f672d146ebb103fe13e147e81c5140
+      size: 4993011
+  transform_data:
+    cmd: python scripts/transform_data.py data/processed/clean.csv 
+      data/processed/transformed.csv
+    deps:
+    - path: data/processed/clean.csv
+      hash: md5
+      md5: 39f672d146ebb103fe13e147e81c5140
+      size: 4993011
+    outs:
+    - path: data/processed/transformed.csv
+      hash: md5
+      md5: 89bea23c0e45ae74a1116be95896b509
+      size: 13013168
+  evaluate_model:
+    cmd: python scripts/evaluate.py data/processed/transformed.csv 
+      models/model.joblib metrics.json evaluation_plots
+    deps:
+    - path: data/processed/transformed.csv
+      hash: md5
+      md5: 89bea23c0e45ae74a1116be95896b509
+      size: 13013168
+    - path: models/model.joblib
+      hash: md5
+      md5: 92ae316cdd093023982d8b9883877474
+      size: 3471
+    outs:
+    - path: evaluation_plots
+      hash: md5
+      md5: ff3c47ca8342f1fa4ea863e6451b76c1.dir
+      size: 136957
+      nfiles: 3
+    - path: metrics.json
+      hash: md5
+      md5: ee3ed7da2d62a93ab8ba73a4619a0a88
+      size: 266
