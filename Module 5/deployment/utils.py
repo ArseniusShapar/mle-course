@@ -6,9 +6,10 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.linear_model import LogisticRegression
 
 
-def load_artifacts() -> tuple[CountVectorizer, LogisticRegression]:
-    vectorizer = joblib.load("deployment/artifacts/count_vectorizer.joblib")
-    model = joblib.load("deployment/artifacts/logistic_regression.joblib")
+def load_artifacts(vectorizer_path='./artifacts/count_vectorizer.joblib',
+                   model_path='./artifacts/logistic_regression.joblib') -> tuple[CountVectorizer, LogisticRegression]:
+    vectorizer = joblib.load(vectorizer_path)
+    model = joblib.load(model_path)
     return vectorizer, model
 
 
@@ -22,7 +23,7 @@ def preprocess(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
-def predict(df: pd.DataFrame, vectorizer, model) -> list[int]:
+def make_predict(df: pd.DataFrame, vectorizer, model) -> list[int]:
     X = vectorizer.transform(df['text'])
     y_pred = model.predict(X)
-    return y_pred
+    return y_pred.tolist()

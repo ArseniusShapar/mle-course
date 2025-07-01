@@ -1,0 +1,22 @@
+services:
+  airflow:
+    build:
+      context: ..
+      dockerfile: batch/Dockerfile.airflow
+    container_name: airflow-batch
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
+      - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db
+      - AIRFLOW__WEBSERVER__AUTHENTICATE=False
+      - AIRFLOW__API__AUTH_BACKENDS=airflow.api.auth.backend.basic_auth
+      - PYTHONPATH=/opt/airflow
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./data:/opt/airflow/data
+      - ../utils.py:/opt/airflow/utils.py
+      - ../artifacts:/opt/airflow/artifacts
+      - ../online:/opt/airflow/online
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080
+    command: bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --role Admin --email admin@example.com && airflow webserver && airflow scheduler --daemon"
