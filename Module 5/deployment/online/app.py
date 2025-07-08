@@ -1,7 +1,6 @@
 import pandas as pd
-from flask import Flask, request, jsonify
-
-from deployment.utils import load_artifacts, preprocess, make_predict
+from flask import Flask, jsonify, request
+from utils import load_artifacts, make_predict, preprocess
 
 app = Flask(__name__)
 vectorizer, model = load_artifacts()

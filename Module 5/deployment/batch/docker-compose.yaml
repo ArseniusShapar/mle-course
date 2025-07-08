@@ -3,7 +3,7 @@ services:
     build:
       context: ..
       dockerfile: batch/Dockerfile.airflow
-    container_name: airflow-batch
+    container_name: module-5-batch
     environment:
       - AIRFLOW__CORE__EXECUTOR=SequentialExecutor
       - AIRFLOW__CORE__SQL_ALCHEMY_CONN=sqlite:////opt/airflow/airflow.db

@@ -3,6 +3,7 @@ FROM python:3.11-slim
 COPY /online/requirements.txt .
 COPY /online /app
 COPY /artifacts /artifacts
+COPY utils.py /app/utils.py
 
 RUN pip install -r requirements.txt
 
