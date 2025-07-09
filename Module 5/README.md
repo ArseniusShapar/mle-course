@@ -3,7 +3,7 @@ Run from folder /deployment.
 ## Online
 
 ```
-docker build -f ./deployment/online/Dockerfile.online -t module-5-online:latest .
+docker build -f ./online/Dockerfile.online -t module-5-online:latest .
 docker run -p 5000:5000 --name module-5-online module-5-online
 ```
 
