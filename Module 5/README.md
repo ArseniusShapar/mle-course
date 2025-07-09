@@ -1,6 +1,6 @@
 Run from folder /deployment.
 
-1. Online
+# Online
    
 docker build -f ./deployment/online/Dockerfile.online -t module-5-online:latest .
 docker run -p 5000:5000 --name module-5-online module-5-online
@@ -17,7 +17,7 @@ curl -X POST "http://localhost:5000/api/predict" \
      -d '{ "text": "I love this product very much!" }'
 
 
-2. Batch (Airflow)
+# Batch (Airflow)
 
 docker-compose -f ./batch/docker-compose.yaml build
 docker-compose -f ./batch/docker-compose.yaml up
