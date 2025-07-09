@@ -23,7 +23,7 @@ curl -X POST "http://localhost:5000/api/predict" \
 
 ## Batch (Airflow)
 ```
-docker-compose -f ./batch/docker-compose.yaml build \
+docker-compose -f ./batch/docker-compose.yaml build
 docker-compose -f ./batch/docker-compose.yaml up
 ```
 In the Airflow GUI run batch_pipeline.
