@@ -1,0 +1,26 @@
+stages:
+  clean_data:
+    cmd: python scripts/clean_data.py data/raw/adult.csv
+      data/processed/clean.csv
+    deps:
+      - data/raw/adult.csv
+    outs:
+      - data/processed/clean.csv
+  transform_data:
+    cmd: python scripts/transform_data.py data/processed/clean.csv
+      data/processed/transformed.csv
+    deps:
+      - data/processed/clean.csv
+    outs:
+      - data/processed/transformed.csv
+  evaluate_model:
+    cmd: python scripts/evaluate.py data/processed/transformed.csv
+      models/model.joblib metrics.json evaluation_plots
+    deps:
+      - data/processed/transformed.csv
+      - models/model.joblib
+    outs:
+      - evaluation_plots
+    metrics:
+      - metrics.json:
+          cache: false
