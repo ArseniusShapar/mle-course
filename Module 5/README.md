@@ -9,9 +9,9 @@ docker run -p 5000:5000 --name module-5-online module-5-online
 
 Powershell: 
 ```
-Invoke-RestMethod -Uri "http://localhost:5000/api/predict" ` \
-                  -Method POST ` \
-                  -Headers @{ "Content-Type" = "application/json" } ` \
+Invoke-RestMethod -Uri "http://localhost:5000/api/predict" `
+                  -Method POST `
+                  -Headers @{ "Content-Type" = "application/json" } `
                   -Body '{ "text": "I love this product very much!" }'
 ```
 Bash: 
